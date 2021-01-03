@@ -1,0 +1,48 @@
+<div class="my-account sec-padding">
+  <div class="container">
+      <mat-card fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center"  class="p-0">
+          <div class="my-account-wrap p-0" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center" >
+              <div class="login-wrapper pr-50" fxFlex="100" fxFlex.gt-md="100" fxFlex.md="100">
+                <div class="login-body">
+                  <div class="alert-success" *ngIf='success==true'>
+                    El inicio de Sesión ha sido exitoso!.
+                    <button type="button" class="alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  </div>
+                  <div class="alert-fail" *ngIf='success==false'>
+                    El inicio de Sesión ha sido fallido!. Verifique sus datos y vuelva a intentarlo.
+                    <button type="button" class="alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  </div>
+                  <div class="title">
+                    <h3>Login</h3>
+                  </div>
+                  <form fxLayout="row wrap" [formGroup]="loginGroup" (ngSubmit)="login()"
+                  (keydown)="keyDownFunction($event)">
+                      <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                          <mat-form-field class="w-100">
+                              <input matInput placeholder="Email" formControlName="email" name="email" required>
+                              <mat-error *ngIf="loginGroup.controls.email.hasError('required')">El Email es requerido</mat-error>
+                              <mat-error *ngIf="loginGroup.controls.email.hasError('email')">Ingrese un Email válido</mat-error>
+                            </mat-form-field>
+                      </div>
+                      <div  fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                          <mat-form-field class="w-100">
+                            <input matInput placeholder="Password" formControlName="password" name="password" [type]="hide ? 'password' : 'text'" required>
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="loginGroup.controls.password.hasError('required')">El Password es requerido</mat-error>
+                            </mat-form-field>
+                      </div>
+                      <p >¿Problemas para inciar sesión? <a [routerLink]="['/user/recovery']">Recuperar contraseña</a></p>
+                      <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                        <br>
+                          <button class="btn-project" mat-raised-button color="accent" type="submit">Iniciar Sesión</button>
+                        </div>
+                      </form>
+                </div>
+                </div>
+        </div>
+      </mat-card>
+
+  </div>
+</div>

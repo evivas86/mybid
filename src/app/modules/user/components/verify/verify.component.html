@@ -1,0 +1,19 @@
+<div class="my-account sec-padding">
+  <div class="container">
+    <mat-card fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start" class="p-0">
+      <div class="my-account-wrap p-0" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center">
+        <div class="register-wrapper pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" *ngIf='success==true'>
+          <div class="title">
+            <h3 class="success_msg">La verificación de su cuenta ha sido exitosa!. Ahora puede proceder a iniciar sesión.</h3>
+          </div>
+        </div>
+
+        <div class="register-wrapper pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" *ngIf='success==false'>
+          <div class="title">
+            <h3 class="error_msg">{{errorMessage}}</h3>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

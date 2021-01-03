@@ -1,0 +1,223 @@
+<div class="my-account sec-padding">
+  <div class="container">
+    <mat-card fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start" class="p-0">
+      <div class="my-account-wrap p-0" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center">
+        <div class="register-wrapper pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" *ngIf='success==true'>
+          <div class="title">
+            <h3 class="success_msg">El Registro ha sido exitoso!. Hemos enviado el enlace de verificación de su cuenta de correo <a href="mailto:{{email}}">{{email}}</a>. Por favor verifique y proceda con la verificaión de su cuenta.</h3>
+          </div>
+        </div>
+
+        <div class="register-wrapper pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" *ngIf='success==false'>
+          <div class="title">
+            <h3 class="error_msg">Hubo un problema con el registro de su cuenta. Por favor intente nuevamente.</h3>
+          </div>
+        </div>
+
+        <div class="register-wrapper pr-15" fxFlex="100" fxFlex.gt-md="50" fxFlex.md="50" [ngClass]="{'hidden': isHidden}">
+          <div class="title">
+            <h3>Registro</h3>
+          </div>
+          <div class="register-body">
+            <mat-tab-group class="vertical-tab-group">
+              <mat-tab label="Datos de Usuario"> 
+                <div fxFlex="100" fxFlex.gt-sm="50" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                  <mat-form-field class="w-100">
+                    <input matInput placeholder="Nombre" name="name" formControlName="name" required />
+                    <mat-error *ngIf="registerGroup.controls.name.hasError('required')">El Nombre es obligatorio
+                    </mat-error>
+                    <mat-error *ngIf="registerGroup.controls.name.hasError('pattern')">El Nombre es solo letras
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div fxFlex="100" fxFlex.gt-sm="45" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                  <mat-form-field class="w-100">
+                    <input matInput placeholder="Apellido" name="lastname" formControlName="lastname" required />
+                    <mat-error *ngIf="registerGroup.controls.lastname.hasError('required')">El Apellido es obligatorio
+                    </mat-error>
+                    <mat-error *ngIf="registerGroup.controls.lastname.hasError('pattern')">El Apellido es solo letras
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                  <mat-form-field class="w-100">
+                    <input matInput placeholder="Email" name="email" formControlName="email" required />
+                    <mat-error *ngIf="registerGroup.controls.email.hasError('required')">El Email es obligatorio
+                    </mat-error>
+                    <mat-error *ngIf="registerGroup.controls.email.hasError('email')">Ingrese un Email válido</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-tab>
+              <mat-tab label="Cambiar Contraseña">
+                <div fxFlex>
+                  <!--password input filed-->
+                  <mat-form-field style="width: 100%;" [color]="color">
+                    <mat-label>Contraseña</mat-label>
+                    <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+                    <input matInput #password [type]="toggle.type" required [formControl]="passwordComponent.passwordFormControl" placeholder="Contraseña" maxlength="30" />
+                    <mat-hint align="end" aria-live="polite">
+                      {{ password.value.length }} / {{ passwordComponent.max }}
+                    </mat-hint>
+                    <mat-error *ngIf="passwordComponent.passwordFormControl.hasError('required')">
+                      La contraseña es requerida
+                    </mat-error>
+                  </mat-form-field>
+                  <!--@angular-material-extensions/password-strength's main component-->
+                  <mat-password-strength #passwordComponent [max] = 30 [password]="password.value">
+                  </mat-password-strength>
+                  <!--Password's strength info-->
+                  <mat-password-strength-info lowerCaseCriteriaMsg="Contiene al menos un minúscula"
+                    upperCaseCriteriaMsg="Contiene al menos una letra mayúscula"
+                    digitsCriteriaMsg="Contiene al menos un número"
+                    specialCharsCriteriaMsg="Contiene al menos un caracter especial"
+                    minCharsCriteriaMsg="Contiene al menos 8 caracteres" [passwordComponent]="passwordComponent">
+                  </mat-password-strength-info>
+                </div>
+  
+                <div fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                  <mat-form-field class="w-100">
+                    <mat-pass-toggle-visibility #toggleConfirmPassword matSuffix></mat-pass-toggle-visibility>
+                    <input matInput #passwordToConfirm [type]="toggleConfirmPassword.type" [formControl]="
+                        passwordComponent.passwordConfirmationFormControl"
+                       placeholder="Confirmar Contraseña" name="regpassword2" maxlength="30" />
+  
+                    <!-- password hint-->
+                    <mat-hint align="end" aria-live="polite">
+                      {{ passwordToConfirm.value.length }} /
+                      {{ passwordComponent.max }}
+                    </mat-hint>
+  
+                    <!-- password error msgs-->
+                    <mat-error *ngIf="
+                        passwordComponent.passwordConfirmationFormControl.hasError(
+                          'required'
+                        )
+                      ">
+                      La confirmacion de la contraseña es requerida
+                    </mat-error>
+                    <mat-error *ngIf="
+                        passwordComponent.passwordConfirmationFormControl.hasError(
+                          'notConfirmed'
+                        )
+                      ">
+                      Las contraseñas no coinciden
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-tab>
+              <mat-tab label="Historial de Compras"> Content 3 </mat-tab>
+            </mat-tab-group>
+            <p>
+              Cree una nueva cuenta hoy para obtener todas las ganancias que
+              ofrecemos.
+            </p>
+            <form fxLayout="row wrap" [formGroup]="registerGroup" (ngSubmit)="register()"
+              (keydown)="keyDownFunction($event)">
+              <div fxFlex="100" fxFlex.gt-sm="50" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="Nombre" name="name" formControlName="name" required />
+                  <mat-error *ngIf="registerGroup.controls.name.hasError('required')">El Nombre es obligatorio
+                  </mat-error>
+                  <mat-error *ngIf="registerGroup.controls.name.hasError('pattern')">El Nombre es solo letras
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <div fxFlex="100" fxFlex.gt-sm="45" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="Apellido" name="lastname" formControlName="lastname" required />
+                  <mat-error *ngIf="registerGroup.controls.lastname.hasError('required')">El Apellido es obligatorio
+                  </mat-error>
+                  <mat-error *ngIf="registerGroup.controls.lastname.hasError('pattern')">El Apellido es solo letras
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="Email" name="email" formControlName="email" required />
+                  <mat-error *ngIf="registerGroup.controls.email.hasError('required')">El Email es obligatorio
+                  </mat-error>
+                  <mat-error *ngIf="registerGroup.controls.email.hasError('email')">Ingrese un Email válido</mat-error>
+                </mat-form-field>
+              </div>
+              <!--///////////////////////////////////////////////////////////////////////////////////-->
+              <!--///////////////////////////////////////////////////////////////////////////////////-->
+              <!--///////////////////////////////////////////////////////////////////////////////////-->
+              <div fxFlex>
+                <!--password input filed-->
+                <mat-form-field style="width: 100%;" [color]="color">
+                  <mat-label>Contraseña</mat-label>
+                  <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+                  <input matInput #password [type]="toggle.type" required [formControl]="passwordComponent.passwordFormControl" placeholder="Contraseña" maxlength="30" />
+                  <mat-hint align="end" aria-live="polite">
+                    {{ password.value.length }} / {{ passwordComponent.max }}
+                  </mat-hint>
+                  <mat-error *ngIf="passwordComponent.passwordFormControl.hasError('required')">
+                    La contraseña es requerida
+                  </mat-error>
+                </mat-form-field>
+                <!--@angular-material-extensions/password-strength's main component-->
+                <mat-password-strength #passwordComponent [max] = 30 [password]="password.value">
+                </mat-password-strength>
+                <!--Password's strength info-->
+                <mat-password-strength-info lowerCaseCriteriaMsg="Contiene al menos un minúscula"
+                  upperCaseCriteriaMsg="Contiene al menos una letra mayúscula"
+                  digitsCriteriaMsg="Contiene al menos un número"
+                  specialCharsCriteriaMsg="Contiene al menos un caracter especial"
+                  minCharsCriteriaMsg="Contiene al menos 8 caracteres" [passwordComponent]="passwordComponent">
+                </mat-password-strength-info>
+              </div>
+
+              <div fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <mat-form-field class="w-100">
+                  <mat-pass-toggle-visibility #toggleConfirmPassword matSuffix></mat-pass-toggle-visibility>
+                  <input matInput #passwordToConfirm [type]="toggleConfirmPassword.type" [formControl]="
+                      passwordComponent.passwordConfirmationFormControl"
+                     placeholder="Confirmar Contraseña" name="regpassword2" maxlength="30" />
+
+                  <!-- password hint-->
+                  <mat-hint align="end" aria-live="polite">
+                    {{ passwordToConfirm.value.length }} /
+                    {{ passwordComponent.max }}
+                  </mat-hint>
+
+                  <!-- password error msgs-->
+                  <mat-error *ngIf="
+                      passwordComponent.passwordConfirmationFormControl.hasError(
+                        'required'
+                      )
+                    ">
+                    La confirmacion de la contraseña es requerida
+                  </mat-error>
+                  <mat-error *ngIf="
+                      passwordComponent.passwordConfirmationFormControl.hasError(
+                        'notConfirmed'
+                      )
+                    ">
+                    Las contraseñas no coinciden
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <!--///////////////////////////////////////////////////////////////////////////////////-->
+              <!--///////////////////////////////////////////////////////////////////////////////////-->
+              <!--///////////////////////////////////////////////////////////////////////////////////-->
+
+              <p>
+                Sus datos personales se utilizarán para respaldar su experiencia
+                en este sitio web, para administrar el acceso a su cuenta y para
+                otros fines descritos en nuestra política de privacidad.
+              </p>
+              <div class="button-wrap" fxFlex="100" fxFlex.gt-sm="100" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                <button class="btn-project" mat-raised-button color="accent" type="submit">
+                  Registro
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

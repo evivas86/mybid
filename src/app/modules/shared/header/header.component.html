@@ -1,0 +1,54 @@
+
+
+
+
+
+
+
+<div class="home-header">
+  <div class="container" >
+    <div class="header-wrapper" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign="space-between center" >
+      <div class="logo">
+        <a [routerLink]="['/home']" routerLinkActive="router-link-active" ><img src="assets/images/logo-02-01.png"></a>
+      </div>  
+      <app-menu></app-menu>
+      <div class="thm-button">
+        <a [routerLink]="['/user/register']"  mat-raised-button color="primary">REGISTRATE</a>
+          &nbsp;
+        <a [routerLink]="['/user/login']" mat-raised-button color="primary">INICIAR SESION</a>
+      </div>
+
+
+    </div>
+
+
+  </div>
+</div>
+<!--<div class="container">
+<div class="menu-container1" fxLayout="row" fxLayoutAlign="space-between center" >
+
+      <app-menu></app-menu>
+      <div class="call-bucket-wrap" fxLayout="row" fxLayout.sm="row" fxLayoutAlign="center center" >
+
+              <div class="main-menu-wrapper-2" fxLayout="row"  fxLayoutAlign="space-between center" >
+                  <mat-toolbar class="top-navbar top menu">
+                      <div fxflexoffset.gt-sm="10"  fxFlex class="search-form">
+                          <mat-form-field appearance="legacy">
+                              <mat-label>Legacy form field</mat-label>
+                              <input matInput placeholder="Search">
+                              <i class="material-icons">
+                                  search
+                                  </i>
+                            </mat-form-field>
+                         </div>
+                         <div class="devider2">
+
+                         </div>
+                    <app-shopping-widgets [shoppingCartItems]="shoppingCartItems"></app-shopping-widgets>
+                  </mat-toolbar>
+                </div>
+            </div>
+  </div>
+
+</div>-->
+
